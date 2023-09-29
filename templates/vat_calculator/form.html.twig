@@ -1,0 +1,33 @@
+{# templates/vat-calculator/form.html.twig #}
+{% extends 'base.html.twig' %}
+{% block body %}
+<h1>VAT Calculator</h1>
+
+{{ form(form) }}
+
+<p><a href="/export" target="_blank">Export as CSV</a></p>
+<p><a href="/clear">Clear History</a></p>
+
+{% if history %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>rate</th>
+                <th>Amount Excluding VAT</th>
+                <th>Amount Including VAT</th>
+                <th>VAT Amount</th>           
+            </tr>
+        </thead>
+    {% for row in history %}
+        <tr>
+            <td>{{ row.amount }}</td>
+            <td>{{ row.rate }}</td>
+            <td>{{ row.inc_vat }}</td>
+            <td>{{ row.exl_vat }}</td>
+            <td>{{ row.vat }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+{% endblock %}
